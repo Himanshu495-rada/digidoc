@@ -1,0 +1,18 @@
+.navbarContainer {
+  background-color: #0c6fe2;
+}
+
+.navbar-brand {
+  font-size: 40px;
+}
+
+.loginBtn button {
+  width: 80px;
+  height: 40px;
+  font-size: 15px;
+  background-color: #eaf8ff;
+  margin-left: 10px;
+  text-align: center;
+  border-radius: 20px;
+  font-weight: bold;
+}

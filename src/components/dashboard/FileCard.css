@@ -1,0 +1,12 @@
+.downloadBtn {
+  border: none;
+  width: 200px;
+  height: 80px;
+  font-size: 18px;
+  color: white;
+  margin: 10px;
+}
+
+.pdfContainer {
+  margin-left: 50px;
+}

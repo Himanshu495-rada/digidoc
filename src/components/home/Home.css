@@ -1,0 +1,24 @@
+.homeContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.btn {
+  width: 200px;
+  height: 50px;
+  background-color: #eaf8ff;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 25px;
+}
+
+.heading {
+  color: white;
+  margin-bottom: 100px;
+}
+
+.heading h1 {
+  font-size: 65px;
+}

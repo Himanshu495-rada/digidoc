@@ -1,0 +1,13 @@
+.contactImage {
+  width: 600px;
+}
+
+.contactBox {
+  width: 600px;
+  height: 310px;
+  background-color: #e8eef1;
+}
+
+.contactRow {
+  padding: 30px;
+}
