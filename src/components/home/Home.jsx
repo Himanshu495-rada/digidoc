@@ -9,12 +9,12 @@ import { Button, Modal, Form } from 'react-bootstrap';
 function Home() {
 
     const token = localStorage.getItem("token");
+    const apiUrl = process.env.REACT_APP_API_URL;
     const [showModal, setShowModal] = useState(false);
     const [login, setLogin] = useState(true);
     const [formData, setFormData] = useState({
         username: '',
         password: '',
-        conpassword: '',
     });
 
     const handleInputChange = (e) => {
@@ -44,7 +44,7 @@ function Home() {
 
     const handleSignup = async () => {
         try {
-            const response = await fetch('https://tararoutray.com/demo/react-auth/login.php', {
+            const response = await fetch(`${apiUrl}/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
