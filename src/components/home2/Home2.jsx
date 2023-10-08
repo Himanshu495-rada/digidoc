@@ -4,6 +4,7 @@ import "./Home2.css"
 function Home2() {
 
   const [selectedFile, setSelectedFile] = useState(null);
+  const apiUrl2 = process.env.REACT_APP_API_URL2;
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -17,19 +18,19 @@ function Home2() {
     }
 
     const formData = new FormData();
-    formData.append('pdfFile', selectedFile);
+    formData.append('file', selectedFile);
 
     try {
-      // const response = await fetch('YOUR_BACKEND_API_URL', {
-      //   method: 'POST',
-      //   body: formData,
-      // });
+      const response = await fetch(`${apiUrl2}/doc/upload`, {
+        method: 'POST',
+        body: formData,
+      });
 
-      // if (response.ok) {
-      //   alert('File uploaded successfully!');
-      // } else {
-      //   alert('File upload failed.');
-      // }
+      if (response.ok) {
+        alert('File uploaded successfully!');
+      } else {
+        alert('File upload failed.');
+      }
       alert('File uploaded successfully!');
     } catch (error) {
       console.error('Error:', error);

@@ -7,10 +7,71 @@ import "./FileCard.css";
 function FileCard({ fileName, id }) {
 
     const [show, setShow] = useState(false);
+    const apiUrl2 = process.env.REACT_APP_API_URL2;
+    const apiUrl3 = process.env.REACT_APP_API_URL3;
     const [numPages, setNumPages] = useState(null);
     function onDocumentSuccess({ numPages }) {
         setNumPages(numPages);
     }
+
+    const handleDownloadXml = async () => {
+        try {
+            // Send a GET request to the API to fetch the XML file
+            const response = await fetch(`${apiUrl2}/doc/xml/${id}`);
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            // Read the response as a binary blob
+            const blob = await response.blob();
+
+            // Create a URL for the blob data
+            const url = window.URL.createObjectURL(blob);
+
+            // Create a download link and trigger a click to start the download
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName.split(".")[0] + "-digital.xml" // Specify the desired file name
+            document.body.appendChild(a);
+            a.click();
+
+            // Clean up by revoking the URL
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            alert('Error fetching and downloading the XML file:', error);
+        }
+    }
+
+    const handleExportPdf = async () => {
+
+        try {
+            // Send a GET request to the API to fetch the PDF file
+            const response = await fetch(`${apiUrl3}/export/${id}`);
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            // Read the response as a blob
+            const pdfBlob = await response.blob();
+
+            // Create a URL for the PDF blob data
+            const pdfUrl = window.URL.createObjectURL(pdfBlob);
+
+            // Create a download link and trigger a click to start the download
+            const a = document.createElement('a');
+            a.href = pdfUrl;
+            a.download = fileName; // Specify the desired file name
+            document.body.appendChild(a);
+            a.click();
+
+            // Clean up by revoking the URL
+            window.URL.revokeObjectURL(pdfUrl);
+        } catch (error) {
+            console.error('Error fetching and downloading the PDF file:', error);
+        }
+    };
 
 
     return (
@@ -48,10 +109,10 @@ function FileCard({ fileName, id }) {
                             <h3 style={{ marginTop: "10px" }} >{fileName}</h3>
                         </div>
                         <div className='d-flex flex-column justify-content-center align-items-center' >
-                            <button className='bg-primary rounded-pill downloadBtn' >
+                            <button className='bg-primary rounded-pill downloadBtn' onClick={handleDownloadXml} >
                                 Download Digital Document (XML)
                             </button>
-                            <button className='bg-success rounded-pill downloadBtn' >
+                            <button className='bg-success rounded-pill downloadBtn' onClick={handleExportPdf} >
                                 Export To PDF
                             </button>
                         </div>

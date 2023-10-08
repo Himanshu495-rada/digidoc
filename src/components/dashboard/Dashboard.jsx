@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom';
 function Dashboard() {
 
   const isAuthenticated = localStorage.getItem('token'); // Check if the user is authenticated
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const id = localStorage.getItem("id");
+  const apiUrl2 = process.env.REACT_APP_API_URL2;
   const navigate = useNavigate();
   const [fileNames, setFileNames] = useState([])
 
@@ -15,7 +16,7 @@ function Dashboard() {
     if (isAuthenticated === null) {
       navigate('/');
     }
-    fetch(`${apiUrl}/dashboard`)
+    fetch(`${apiUrl2}/doc/list/${id}`)
       .then((response) => response.json())
       .then((data) => {
         // Assuming the API response is an array of objects like { filename, id }

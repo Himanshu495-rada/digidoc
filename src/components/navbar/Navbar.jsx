@@ -49,8 +49,10 @@ const Navbar = () => {
                 // Successful login
                 const data = await response.json();
                 const token = data.token;
+                const id = data.id;
                 // Store the token in local storage or state for authentication
                 localStorage.setItem('token', token);
+                localStorage.setItem("id", id);
                 // Redirect or perform any necessary actions after successful login
             } else {
                 // Failed login
